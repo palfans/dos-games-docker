@@ -5,11 +5,13 @@ RUN \
   apk add --no-cache python3 py3-pip && \
   echo "**** install Flask ****" && \
   pip3 install flask && \
-  echo "initial work git repo" && \
+  echo "**** initial work git repo ****" && \
   apk add --no-cache git && \
   git clone https://github.com/rwv/chinese-dos-games-web.git /dosgames && \
-  echo "**** cleanup ****" && \
-  
+  echo "**** update parameters ****" && \
+  sed -i "s/app.run(.*$/app.run(host='0.0.0.0')/g" /dosgames/app.py
+
+
 # ports and volumes
 EXPOSE 5000
 VOLUME /dosgames/static/games
